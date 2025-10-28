@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الإنشاء بالجيوجيبرا - د. بن الدين بويعقوب</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* الأساسيات */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-blue: #3498db;
+            --light-blue: #5dade2;
+            --dark-blue: #1a5276;
+            --white: #ffffff;
+            --red: #e74c3c;
+            --green: #2ecc71;
+            --yellow: #f1c40f;
+            --gray: #f5f5f5;
+            --dark-gray: #333;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--light-blue) 0%, var(--white) 100%);
+            color: var(--dark-gray);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* الترويسة */
+        header {
+            background: linear-gradient(to right, var(--dark-blue), var(--primary-blue));
+            color: var(--white);
+            padding: 30px 0;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            font-size: 2.5rem;
+            margin-left: 15px;
+            color: var(--yellow);
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .logo p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 8px 15px;
+            border-radius: 20px;
+        }
+
+        nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* قسم المقدمة */
+        .hero {
+            padding: 80px 0;
+            text-align: center;
+            background-color: var(--white);
+            border-radius: 20px;
+            margin: 40px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--red), var(--yellow), var(--green), var(--primary-blue));
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            color: var(--dark-blue);
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            color: #555;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(to right, var(--primary-blue), var(--dark-blue));
+            color: var(--white);
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(52, 152, 219, 0.4);
+        }
+
+        /* قسم المحتوى */
+        .content-section {
+            background-color: var(--white);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--dark-blue);
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, var(--red), var(--yellow), var(--green), var(--primary-blue));
+            border-radius: 2px;
+        }
+
+        /* معرض الصور */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .gallery-item {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            background-color: var(--gray);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .gallery-item .image-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.05);
+            color: var(--dark-gray);
+            font-weight: bold;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .gallery-item .image-placeholder i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--primary-blue);
+        }
+
+        /* قسم الفيديوهات */
+        .videos {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .video-item {
+            background-color: var(--gray);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            height: 200px;
+        }
+
+        .video-item iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-item:hover {
+            transform: translateY(-5px);
+        }
+
+        /* قسم المميزات */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .feature {
+            background-color: var(--gray);
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            border-left: 5px solid var(--primary-blue);
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature i {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+        }
+
+        .feature h3 {
+            color: var(--dark-blue);
+            margin-bottom: 15px;
+        }
+
+        /* قسم الفهرس */
+        .index {
+            background-color: var(--gray);
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+
+        .index-columns {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .index-list {
+            list-style-type: none;
+        }
+
+        .index-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+            position: relative;
+            padding-right: 20px;
+        }
+
+        .index-list li::before {
+            content: "•";
+            color: var(--primary-blue);
+            font-weight: bold;
+            position: absolute;
+            right: 0;
+        }
+
+        /* نموذج التسجيل */
+        .registration {
+            background: linear-gradient(135deg, var(--light-blue) 0%, var(--white) 100%);
+            padding: 40px;
+            border-radius: 20px;
+            margin: 40px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark-blue);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-blue);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* التذييل */
+        footer {
+            background: linear-gradient(to right, var(--dark-blue), var(--primary-blue));
+            color: var(--white);
+            padding: 40px 0;
+            border-radius: 20px 20px 0 0;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 300px;
+            margin-bottom: 20px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-section h3::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--yellow);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--yellow);
+            padding-right: 5px;
+        }
+
+        .social-icons {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin-left: 10px;
+            transition: all 0.3s ease;
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .social-icons a:hover {
+            background-color: var(--yellow);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* رسالة النجاح والخطأ */
+        .success-message {
+            display: none;
+            background-color: var(--green);
+            color: var(--white);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .error-message {
+            display: none;
+            background-color: var(--red);
+            color: var(--white);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .upload-info {
+            background-color: var(--light-blue);
+            color: var(--dark-blue);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* التجاوب مع الشاشات المختلفة */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px 10px;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- الترويسة -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-book-open"></i>
+                    <div>
+                        <h1>الإنشاء بالجيوجيبرا</h1>
+                        <p>د. بن الدين بويعقوب - خبير الرياضيات الديناميكية</p>
+                    </div>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#about">عن الكتاب</a></li>
+                        <li><a href="#gallery">معرض الصور</a></li>
+                        <li><a href="#videos">الفيديوهات</a></li>
+                        <li><a href="#features">المميزات</a></li>
+                        <li><a href="#index">فهرس المحتويات</a></li>
+                        <li><a href="#register">طلب الكتاب</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- المحتوى الرئيسي -->
+    <div class="container">
+        <!-- قسم المقدمة -->
+        <section class="hero">
+            <h2>اكتشف عالم الرياضيات التفاعلية</h2>
+            <p>كتاب "الإنشاء بالجيوجيبرا" هو الدليل الشامل لتعلم واستخدام برنامج الرياضيات الديناميكي الرائد، من تأليف الخبير الدكتور بن الدين بويعقوب. يقدم الكتاب منهجية متكاملة تبدأ من الأساسيات وصولاً إلى الاحتراف.</p>
+            <a href="#register" class="btn">سجل لطلب الكتاب</a>
+        </section>
+
+        <!-- قسم عن الكتاب -->
+        <section id="about" class="content-section">
+            <h2 class="section-title">عن الكتاب</h2>
+            <p>لقد تطورت Geogebra على مر السنين من البرمجيات للعمل وحصريا مع الهندسة التحليلية، لتصبح أداة قوية ومتعددة الإستخدامات للتدريس وتعلم الرياضيات بشكل ديناميكي، تم اكتشاف إمكاناتها في أدواتها مع الهندسة، والدوال وحساب التفاضل والتكامل، والجبر والاحصاء والاحتمالات ومجالات أخرى في الرياضيات.</p>
+            <p>لإتقان كل هذه الإمكانات التي تتميز بها Geogebra من الضروري أن تبدأ من البداية لبناء أسس التعلم الخاصة بك، والتي تمهد الطريق لتصبح خبيرا في Geogebra وهذا ما سوف نقدمه في هذا الكتاب حيث أقدم فيه كيفية تعلم إستخدام Geogebra بسهولة وسرعة.</p>
+        </section>
+
+        <!-- معرض الصور -->
+        <section id="gallery" class="content-section">
+            <h2 class="section-title">معرض الصور</h2>
+            <div class="gallery">
+                <!-- صورة الكتاب -->
+                <div class="gallery-item" style="background-image: url('https://i.ibb.co/JWcfmg74/photo1.jpg')">
+                    <div class="image-placeholder" style="display: none;">
+                        <i class="fas fa-image"></i>
+                        <span>صورة الكتاب</span>
+                    </div>
+                </div>
+                
+                <!-- أمثلة من الكتاب -->
+                <div class="gallery-item" style="background-image: url('https://i.ibb.co/q3QVnd3Z/photo2.jpg')">
+                    <div class="image-placeholder" style="display: none;">
+                        <i class="fas fa-image"></i>
+                        <span>أمثلة من الكتاب</span>
+                    </div>
+                </div>
+                
+                <!-- مثال في الإحصاء -->
+                <div class="gallery-item" style="background-image: url('https://i.ibb.co/XrJLbS8Z/photo3.png')">
+                    <div class="image-placeholder" style="display: none;">
+                        <i class="fas fa-image"></i>
+                        <span>مثال في الإحصاء</span>
+                    </div>
+                </div>
+                
+                <!-- أمثلة من الكتاب -->
+                <div class="gallery-item" style="background-image: url('https://i.ibb.co/Dg5gYY59/photo4.png')">
+                    <div class="image-placeholder" style="display: none;">
+                        <i class="fas fa-image"></i>
+                        <span>أمثلة من الكتاب</span>
+                    </div>
+                </div>
+                
+                <!-- صور إضافية -->
+                <div class="gallery-item">
+                    <div class="image-placeholder">
+                        <i class="fas fa-image"></i>
+                        <span>إنشاءات هندسية</span>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <div class="image-placeholder">
+                        <i class="fas fa-chart-line"></i>
+                        <span>رسوم بيانية</span>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <div class="image-placeholder">
+                        <i class="fas fa-calculator"></i>
+                        <span>تمارين عملية</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم الفيديوهات -->
+        <section id="videos" class="content-section">
+            <h2 class="section-title">الفيديوهات التوضيحية</h2>
+            <div class="videos">
+                <div class="video-item">
+                    <iframe src="https://www.youtube.com/embed/t1Zlhubi280" allowfullscreen></iframe>
+                </div>
+                <div class="video-item">
+                    <iframe src="https://www.youtube.com/embed/nJxF9hvwF-8" allowfullscreen></iframe>
+                </div>
+                <div class="video-item">
+                    <iframe src="https://www.youtube.com/embed/CX96wIlrJEA" allowfullscreen></iframe>
+                </div>
+                <div class="video-item">
+                    <iframe src="https://www.youtube.com/embed/KHQS8arTsL4" allowfullscreen></iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم المميزات -->
+        <section id="features" class="content-section">
+            <h2 class="section-title">مميزات الكتاب</h2>
+            <div class="features">
+                <div class="feature">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3>منهج متكامل</h3>
+                    <p>يغطي جميع أساسيات برنامج الجيوجيبرا من البداية إلى الاحتراف</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-laptop-code"></i>
+                    <h3>عملي وتطبيقي</h3>
+                    <p>يقدم أمثلة عملية وإنشاءات تفاعلية تغطي جميع مجالات الرياضيات</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-users"></i>
+                    <h3>ملائم للجميع</h3>
+                    <p>مناسب للمعلمين والطلاب من المرحلة الابتدائية حتى الجامعية</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم الفهرس -->
+        <section id="index" class="content-section">
+            <h2 class="section-title">فهرس المحتويات</h2>
+            <div class="index">
+                <div class="index-columns">
+                    <ul class="index-list">
+                        <li>مقدمة</li>
+                        <li>بدأ تشغيل Geogebra</li>
+                        <li>بدأ إستخدام برنامج Geogebra</li>
+                        <li>عمليات أساسية في Geogebra</li>
+                        <li>نوافذ مختلفة في Geogebra</li>
+                        <li>نافذة العمل La vue Graphique</li>
+                    </ul>
+                    <ul class="index-list">
+                        <li>حقل المدخلات Le champ de saisie</li>
+                        <li>المؤشرات</li>
+                        <li>ادراج الصور</li>
+                        <li>نقل عنصر كصورة</li>
+                        <li>الدوال العددية في Geogebra</li>
+                        <li>الدوال الأصلية والحساب التكاملي</li>
+                    </ul>
+                    <ul class="index-list">
+                        <li>استعمال جيوجيبرا في الهندسة</li>
+                        <li>استعمال جيوجيبرا في الإحصاء</li>
+                        <li>أمثلة حية على الإنشاء</li>
+                        <li>روابط لصفحات الجيوجيبرا</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- نموذج التسجيل -->
+        <section id="register" class="registration">
+            <h2 class="section-title">سجل لطلب الكتاب</h2>
+            <form id="bookOrderForm" method="POST">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">الاسم</label>
+                        <input type="text" id="firstName" name="firstName" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">اللقب</label>
+                        <input type="text" id="lastName" name="lastName" class="form-control" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">البريد الإلكتروني</label>
+                        <input type="email" id="email" name="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="country">البلد</label>
+                        <input type="text" id="country" name="country" class="form-control" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="notes">ملاحظات إضافية</label>
+                    <textarea id="notes" name="notes" class="form-control" placeholder="أي ملاحظات إضافية أو استفسارات..."></textarea>
+                </div>
+                
+                <button type="submit" class="btn">إرسال الطلب</button>
+            </form>
+            <div id="successMessage" class="success-message">
+                <i class="fas fa-check-circle"></i> تم إرسال طلبك بنجاح! سنتواصل معك قريباً.
+            </div>
+            <div id="errorMessage" class="error-message">
+                <i class="fas fa-exclamation-triangle"></i> حدث خطأ أثناء الإرسال. يرجى المحاولة مرة أخرى.
+            </div>
+        </section>
+    </div>
+
+    <!-- التذييل -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>معلومات التواصل</h3>
+                    <p>دار أحلام للنشر</p>
+                    <p>البريد الإلكتروني: beneddineinps@gmail.com</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>روابط سريعة</h3>
+                    <ul class="footer-links">
+                        <li><a href="#about">عن الكتاب</a></li>
+                        <li><a href="#gallery">معرض الصور</a></li>
+                        <li><a href="#videos">الفيديوهات</a></li>
+                        <li><a href="#features">المميزات</a></li>
+                        <li><a href="#index">فهرس المحتويات</a></li>
+                        <li><a href="#register">طلب الكتاب</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>حول المؤلف</h3>
+                    <p>الدكتور بن الدين بويعقوب هو خبير في الرياضيات الديناميكية ومتخصص في استخدام برنامج الجيوجيبرا في التعليم. له العديد من الإسهامات في تطوير مناهج الرياضيات التفاعلية.</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>جميع الحقوق محفوظة &copy; 2023 - الإنشاء بالجيوجيبرا - د. بن الدين بويعقوب</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // تأثير التمرير السلس للروابط الداخلية
+        document.querySelectorAll('nav a, .footer-links a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // إضافة تأثيرات عند التمرير
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.padding = '15px 0';
+                header.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.15)';
+            } else {
+                header.style.padding = '30px 0';
+                header.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)';
+            }
+        });
+
+        // تأثيرات للعناصر عند ظهورها
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // تطبيق التأثير على العناصر
+        document.querySelectorAll('.content-section, .feature, .gallery-item, .video-item, .registration').forEach(el => {
+            el.style.opacity = 0;
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(el);
+        });
+
+        // معالجة نموذج الطلب
+        document.getElementById('bookOrderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            
+            // إخفاء الرسائل السابقة
+            document.getElementById('successMessage').style.display = 'none';
+            document.getElementById('errorMessage').style.display = 'none';
+            
+            // عرض رسالة التحميل
+            submitBtn.textContent = 'جاري الإرسال...';
+            submitBtn.disabled = true;
+            
+            // إرسال البيانات إلى FormCarry
+            fetch('https://formcarry.com/s/xS-GB21OP-Y', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    // نجاح الإرسال
+                    document.getElementById('successMessage').style.display = 'block';
+                    this.reset();
+                    
+                    // التمرير إلى رسالة النجاح
+                    document.getElementById('successMessage').scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                } else {
+                    throw new Error('Network response was not ok');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('errorMessage').style.display = 'block';
+                
+                // التمرير إلى رسالة الخطأ
+                document.getElementById('errorMessage').scrollIntoView({
+                    behavior: 'smooth'
+                });
+            })
+            .finally(() => {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            });
+        });
+
+        // تحميل الصور والتحقق منها
+        document.addEventListener('DOMContentLoaded', function() {
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            
+            galleryItems.forEach(item => {
+                const backgroundImage = item.style.backgroundImage;
+                
+                // إذا كانت هناك صورة خلفية، اخفِ العنصر النائب
+                if (backgroundImage && backgroundImage !== 'none') {
+                    const placeholder = item.querySelector('.image-placeholder');
+                    if (placeholder) {
+                        // اختبار تحميل الصورة
+                        const img = new Image();
+                        img.onload = function() {
+                            placeholder.style.display = 'none';
+                        };
+                        img.onerror = function() {
+                            placeholder.style.display = 'flex';
+                        };
+                        // استخراج رابط الصورة من background-image
+                        const imageUrl = backgroundImage.replace('url("', '').replace('")', '');
+                        img.src = imageUrl;
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
