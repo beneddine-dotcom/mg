@@ -132,7 +132,7 @@
             left: 0;
             width: 100%;
             height: 5px;
-            background: linear-gradient(to right, var(--red), var(--yellow), var(--green), var(--primary-blue));
+            background: linear-gradient(to right, var(--red), var(--white), var(--green), var(--primary-blue));
         }
 
         .hero h2 {
@@ -419,7 +419,7 @@
             right: 0;
             width: 50px;
             height: 3px;
-            background-color: var(--yellow);
+            background-color: var(--white);
         }
 
         .footer-links {
@@ -437,7 +437,7 @@
         }
 
         .footer-links a:hover {
-            color: var(--yellow);
+            color: var(--red);
             padding-right: 5px;
         }
 
@@ -461,7 +461,7 @@
         }
 
         .social-icons a:hover {
-            background-color: var(--yellow);
+            background-color: var(--white);
             transform: translateY(-3px);
         }
 
@@ -472,37 +472,54 @@
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* رسالة النجاح والخطأ */
-        .success-message {
-            display: none;
-            background-color: var(--green);
+        /* نتائج النموذج */
+        .form-result {
+            background: var(--green);
             color: var(--white);
-            padding: 15px;
-            border-radius: 8px;
+            padding: 20px;
+            border-radius: 10px;
             margin-top: 20px;
             text-align: center;
-            font-weight: bold;
+            display: none;
         }
 
-        .error-message {
-            display: none;
-            background-color: var(--red);
-            color: var(--white);
+        .form-result.error {
+            background: var(--red);
+        }
+
+        .data-preview {
+            background: var(--gray);
             padding: 15px;
             border-radius: 8px;
-            margin-top: 20px;
-            text-align: center;
-            font-weight: bold;
+            margin-top: 15px;
+            text-align: right;
+            direction: rtl;
+            color: var(--dark-gray);
         }
 
-        .upload-info {
-            background-color: var(--light-blue);
+        .data-preview h4 {
             color: var(--dark-blue);
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .data-preview p {
+            margin: 5px 0;
+            padding: 5px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .admin-panel {
+            background: var(--green);
             padding: 15px;
-            border-radius: 8px;
+            border-radius: 10px;
             margin-top: 20px;
             text-align: center;
-            font-weight: bold;
+        }
+
+        .admin-panel h4 {
+            color: var(--dark-gray);
+            margin-bottom: 10px;
         }
 
         /* التجاوب مع الشاشات المختلفة */
@@ -713,7 +730,8 @@
         <!-- نموذج التسجيل -->
         <section id="register" class="registration">
             <h2 class="section-title">سجل لطلب الكتاب</h2>
-            <form id="bookOrderForm" method="POST">
+            
+            <form id="bookOrderForm">
                 <div class="form-row">
                     <div class="form-group">
                         <label for="firstName">الاسم</label>
@@ -731,8 +749,19 @@
                         <input type="email" id="email" name="email" class="form-control" required>
                     </div>
                     <div class="form-group">
+                        <label for="phone">رقم الهاتف</label>
+                        <input type="tel" id="phone" name="phone" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
                         <label for="country">البلد</label>
                         <input type="text" id="country" name="country" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="city">المدينة</label>
+                        <input type="text" id="city" name="city" class="form-control" required>
                     </div>
                 </div>
                 
@@ -740,14 +769,42 @@
                     <label for="notes">ملاحظات إضافية</label>
                     <textarea id="notes" name="notes" class="form-control" placeholder="أي ملاحظات إضافية أو استفسارات..."></textarea>
                 </div>
+
+                <div class="form-group">
+                    <label for="copyRequest">
+                        <input type="checkbox" id="copyRequest" name="copyRequest" value="نعم" checked>
+                        أود الحصول على نسخة من كتاب الإنشاء بالجيوجيبرا
+                    </label>
+                </div>
                 
                 <button type="submit" class="btn">إرسال الطلب</button>
             </form>
-            <div id="successMessage" class="success-message">
-                <i class="fas fa-check-circle"></i> تم إرسال طلبك بنجاح! سنتواصل معك قريباً.
+
+            <!-- نتيجة الإرسال -->
+            <div id="formResult" class="form-result">
+                <i class="fas fa-check-circle"></i>
+                <span id="resultMessage">تم إرسال طلبك بنجاح!</span>
+                <div id="dataPreview" class="data-preview"></div>
+                <button onclick="printFormData()" class="btn" style="margin-top: 10px;">
+                    <i class="fas fa-print"></i> طباعة البيانات
+                </button>
+                <button onclick="downloadFormData()" class="btn" style="margin-top: 10px; background: var(--green);">
+                    <i class="fas fa-download"></i> حفظ البيانات
+                </button>
             </div>
-            <div id="errorMessage" class="error-message">
-                <i class="fas fa-exclamation-triangle"></i> حدث خطأ أثناء الإرسال. يرجى المحاولة مرة أخرى.
+
+            <!-- لوحة التحكم للمسؤول -->
+            <div class="admin-panel">
+                <h4><i class="fas fa-cog"></i> لوحة التحكم (للمسؤول)</h4>
+                <button onclick="showAllOrders()" class="btn" style="background: var(--dark-blue);">
+                    <i class="fas fa-list"></i> عرض جميع الطلبات
+                </button>
+                <button onclick="clearAllOrders()" class="btn" style="background: var(--red);">
+                    <i class="fas fa-trash"></i> مسح جميع الطلبات
+                </button>
+                <button onclick="exportAllOrders()" class="btn" style="background: var(--green);">
+                    <i class="fas fa-file-export"></i> تصدير جميع الطلبات
+                </button>
             </div>
         </section>
     </div>
@@ -758,7 +815,7 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>معلومات التواصل</h3>
-                    <p>المؤلف</p>
+                    <p>دار أحلام للنشر</p>
                     <p>البريد الإلكتروني: beneddineinps@gmail.com</p>
                     <div class="social-icons">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -784,12 +841,15 @@
                 </div>
             </div>
             <div class="copyright">
-                <p>جميع الحقوق محفوظة &copy; 2025 - الإنشاء بالجيوجيبرا - د. بن الدين بويعقوب</p>
+                <p>جميع الحقوق محفوظة &copy; 2023 - الإنشاء بالجيوجيبرا - د. بن الدين بويعقوب</p>
             </div>
         </div>
     </footer>
 
     <script>
+        // تخزين البيانات محلياً
+        let formSubmissions = JSON.parse(localStorage.getItem('bookOrders')) || [];
+
         // تأثير التمرير السلس للروابط الداخلية
         document.querySelectorAll('nav a, .footer-links a').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
@@ -839,83 +899,108 @@
             observer.observe(el);
         });
 
-        // معالجة نموذج الطلب
+        // معالجة النموذج
         document.getElementById('bookOrderForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const formData = new FormData(this);
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const originalText = submitBtn.textContent;
+            // جمع البيانات
+            const formData = {
+                id: Date.now(), // معرف فريد
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                country: document.getElementById('country').value,
+                city: document.getElementById('city').value,
+                notes: document.getElementById('notes').value,
+                copyRequest: document.getElementById('copyRequest').checked ? 'نعم' : 'لا',
+                timestamp: new Date().toLocaleString('ar-EG', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                })
+            };
+
+            // التحقق من البيانات
+            if (!validateForm(formData)) {
+                return;
+            }
+
+            // حفظ البيانات
+            saveFormData(formData);
             
-            // إخفاء الرسائل السابقة
-            document.getElementById('successMessage').style.display = 'none';
-            document.getElementById('errorMessage').style.display = 'none';
+            // عرض النتيجة
+            showSuccessMessage(formData);
             
-            // عرض رسالة التحميل
-            submitBtn.textContent = 'جاري الإرسال...';
-            submitBtn.disabled = true;
-            
-            // إرسال البيانات إلى FormCarry
-            fetch('https://formsubmit.co', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => {
-                if (response.ok) {
-                    // نجاح الإرسال
-                    document.getElementById('successMessage').style.display = 'block';
-                    this.reset();
-                    
-                    // التمرير إلى رسالة النجاح
-                    document.getElementById('successMessage').scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                } else {
-                    throw new Error('Network response was not ok');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                document.getElementById('errorMessage').style.display = 'block';
-                
-                // التمرير إلى رسالة الخطأ
-                document.getElementById('errorMessage').scrollIntoView({
-                    behavior: 'smooth'
-                });
-            })
-            .finally(() => {
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-            });
+            // إعادة تعيين النموذج
+            this.reset();
         });
 
-        // تحميل الصور والتحقق منها
-        document.addEventListener('DOMContentLoaded', function() {
-            const galleryItems = document.querySelectorAll('.gallery-item');
+        // دالة التحقق من البيانات
+        function validateForm(data) {
+            if (!data.email.includes('@')) {
+                showError('البريد الإلكتروني غير صحيح');
+                return false;
+            }
             
-            galleryItems.forEach(item => {
-                const backgroundImage = item.style.backgroundImage;
-                
-                // إذا كانت هناك صورة خلفية، اخفِ العنصر النائب
-                if (backgroundImage && backgroundImage !== 'none') {
-                    const placeholder = item.querySelector('.image-placeholder');
-                    if (placeholder) {
-                        // اختبار تحميل الصورة
-                        const img = new Image();
-                        img.onload = function() {
-                            placeholder.style.display = 'none';
-                        };
-                        img.onerror = function() {
-                            placeholder.style.display = 'flex';
-                        };
-                        // استخراج رابط الصورة من background-image
-                        const imageUrl = backgroundImage.replace('url("', '').replace('")', '');
-                        img.src = imageUrl;
-                    }
-                }
-            });
-        });
-    </script>
-</body>
+            if (data.phone.length < 8) {
+                showError('رقم الهاتف يجب أن يكون 8 أرقام على الأقل');
+                return false;
+            }
+            
+            if (data.firstName.length < 2) {
+                showError('الاسم يجب أن يكون حرفين على الأقل');
+                return false;
+            }
+            
+            return true;
+        }
 
-</html>
+        // دالة حفظ البيانات
+        function saveFormData(data) {
+            formSubmissions.push(data);
+            localStorage.setItem('bookOrders', JSON.stringify(formSubmissions));
+            
+            // إشعار بالإرسال
+            console.log('تم حفظ البيانات:', data);
+        }
+
+        // دالة عرض رسالة النجاح
+        function showSuccessMessage(data) {
+            const resultDiv = document.getElementById('formResult');
+            const messageSpan = document.getElementById('resultMessage');
+            const dataPreview = document.getElementById('dataPreview');
+            
+            // إعداد رسالة النجاح
+            messageSpan.textContent = `شكراً ${data.firstName}! تم تسجيل طلبك بنجاح`;
+            resultDiv.className = 'form-result';
+            
+            // إعداد معاينة البيانات
+            dataPreview.innerHTML = `
+                <h4>تفاصيل الطلب:</h4>
+                <p><strong>الاسم:</strong> ${data.firstName} ${data.lastName}</p>
+                <p><strong>البريد الإلكتروني:</strong> ${data.email}</p>
+                <p><strong>الهاتف:</strong> ${data.phone}</p>
+                <p><strong>العنوان:</strong> ${data.city} - ${data.country}</p>
+                <p><strong>طلب نسخة:</strong> ${data.copyRequest}</p>
+                <p><strong>الملاحظات:</strong> ${data.notes || 'لا توجد'}</p>
+                <p><strong>وقت التسجيل:</strong> ${data.timestamp}</p>
+                <p><strong>رقم الطلب:</strong> #${data.id}</p>
+            `;
+            
+            // إظهار النتيجة
+            resultDiv.style.display = 'block';
+            
+            // التمرير إلى النتيجة
+            resultDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // دالة عرض الخطأ
+        function showError(message) {
+            const resultDiv = document.getElementById('formResult');
+            const messageSpan = document.getElementById('resultMessage');
+            
+            messageSpan.textContent = message;
+            resultDiv.className = 'form-result error
