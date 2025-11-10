@@ -362,50 +362,45 @@
             right: 0;
         }
 
-        /* نموذج التسجيل */
-        .registration {
-            background: linear-gradient(135deg, var(--light-blue) 0%, var(--white) 100%);
+        /* قسم معلومات الاتصال */
+        .contact-info {
+            background: var(--yellow);
+            color: var(--dark-gray);
             padding: 40px;
             border-radius: 20px;
             margin: 40px 0;
+            text-align: center;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
-        .form-group {
+        .contact-info h3 {
             margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
             color: var(--dark-blue);
+            font-size: 2rem;
         }
 
-        .form-control {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border 0.3s ease;
+        .contact-details {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-top: 30px;
         }
 
-        .form-control:focus {
-            border-color: var(--primary-blue);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.3rem;
+            background: var(--white);
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        textarea.form-control {
-            min-height: 120px;
-            resize: vertical;
+        .contact-item i {
+            color: var(--dark-blue);
+            font-size: 1.8rem;
         }
 
         /* التذييل */
@@ -495,124 +490,6 @@
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* قسم معلومات الاتصال */
-        .contact-info {
-            background: var(--yellow);
-            color: var(--dark-gray);
-            padding: 30px;
-            border-radius: 15px;
-            margin-top: 40px;
-            text-align: center;
-        }
-
-        .contact-info h3 {
-            margin-bottom: 20px;
-            color: var(--dark-blue);
-        }
-
-        .contact-details {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 30px;
-            margin-top: 20px;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.1rem;
-        }
-
-        .contact-item i {
-            color: var(--dark-blue);
-            font-size: 1.3rem;
-        }
-
-        /* نتائج النموذج */
-        .form-result {
-            background: var(--green);
-            color: var(--white);
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 20px;
-            text-align: center;
-            display: none;
-        }
-
-        .form-result.error {
-            background: var(--red);
-        }
-
-        .data-preview {
-            background: var(--gray);
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 15px;
-            text-align: right;
-            direction: rtl;
-            color: var(--dark-gray);
-        }
-
-        .data-preview h4 {
-            color: var(--dark-blue);
-            margin-bottom: 10px;
-            text-align: center;
-        }
-
-        .data-preview p {
-            margin: 5px 0;
-            padding: 5px 0;
-            border-bottom: 1px solid #ddd;
-        }
-
-        /* لوحة المسؤول */
-        .admin-panel {
-            background: var(--yellow);
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 30px;
-            text-align: center;
-            display: none;
-        }
-
-        .admin-panel h4 {
-            color: var(--dark-gray);
-            margin-bottom: 15px;
-        }
-
-        .admin-login {
-            background: var(--light-blue);
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        .admin-login input {
-            padding: 10px;
-            margin: 5px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            width: 200px;
-        }
-
-        .orders-list {
-            max-height: 500px;
-            overflow-y: auto;
-            margin-top: 20px;
-            text-align: right;
-        }
-
-        .order-item {
-            background: var(--white);
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: 8px;
-            border-right: 4px solid var(--primary-blue);
-        }
-
         /* التجاوب مع الشاشات المختلفة */
         @media (max-width: 768px) {
             .header-content {
@@ -638,13 +515,13 @@
                 font-size: 1rem;
             }
             
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-            
             .contact-details {
                 flex-direction: column;
-                gap: 15px;
+                gap: 20px;
+            }
+            
+            .contact-item {
+                font-size: 1.1rem;
             }
         }
     </style>
@@ -668,7 +545,7 @@
                         <li><a href="#videos">الفيديوهات</a></li>
                         <li><a href="#features">المميزات</a></li>
                         <li><a href="#index">فهرس المحتويات</a></li>
-                        <li><a href="#register">طلب الكتاب</a></li>
+                        <li><a href="#contact">اتصل بنا</a></li>
                     </ul>
                 </nav>
                 <a href="#contact" class="contact-btn">
@@ -684,7 +561,7 @@
         <section class="hero">
             <h2>اكتشف عالم الرياضيات التفاعلية</h2>
             <p>كتاب "الإنشاء بالجيوجيبرا" هو الدليل الشامل لتعلم واستخدام برنامج الرياضيات الديناميكي الرائد، من تأليف الخبير الدكتور بن الدين بويعقوب. يقدم الكتاب منهجية متكاملة تبدأ من الأساسيات وصولاً إلى الاحتراف.</p>
-            <a href="#register" class="btn">سجل لطلب الكتاب</a>
+            <a href="#contact" class="btn">اتصل بنا للحصول على الكتاب</a>
         </section>
 
         <!-- قسم عن الكتاب -->
@@ -826,108 +703,21 @@
             </div>
         </section>
 
-        <!-- نموذج التسجيل -->
-        <section id="register" class="registration">
-            <h2 class="section-title">سجل لطلب الكتاب</h2>
-            
-            <form id="bookOrderForm">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="firstName">الاسم</label>
-                        <input type="text" id="firstName" name="firstName" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="lastName">اللقب</label>
-                        <input type="text" id="lastName" name="lastName" class="form-control" required>
-                    </div>
+        <!-- قسم معلومات الاتصال -->
+        <section id="contact" class="contact-info">
+            <h3>معلومات الاتصال</h3>
+            <p>للاستفسار عن الكتاب أو طلبات الشراء، يمكنكم التواصل مباشرة مع الدكتور بن الدين بويعقوب:</p>
+            <div class="contact-details">
+                <div class="contact-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <span>0558474456</span>
                 </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="email">البريد الإلكتروني</label>
-                        <input type="email" id="email" name="email" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">رقم الهاتف</label>
-                        <input type="tel" id="phone" name="phone" class="form-control" required>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="country">البلد</label>
-                        <input type="text" id="country" name="country" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="city">المدينة</label>
-                        <input type="text" id="city" name="city" class="form-control" required>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="notes">ملاحظات إضافية</label>
-                    <textarea id="notes" name="notes" class="form-control" placeholder="أي ملاحظات إضافية أو استفسارات..."></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="copyRequest">
-                        <input type="checkbox" id="copyRequest" name="copyRequest" value="نعم" checked>
-                        أود الحصول على نسخة من كتاب الإنشاء بالجيوجيبرا
-                    </label>
-                </div>
-                
-                <button type="submit" class="btn">إرسال الطلب</button>
-            </form>
-
-            <!-- نتيجة الإرسال -->
-            <div id="formResult" class="form-result">
-                <i class="fas fa-check-circle"></i>
-                <span id="resultMessage">تم إرسال طلبك بنجاح!</span>
-                <div id="dataPreview" class="data-preview"></div>
-                <button onclick="printFormData()" class="btn" style="margin-top: 10px;">
-                    <i class="fas fa-print"></i> طباعة البيانات
-                </button>
-                <button onclick="downloadFormData()" class="btn" style="margin-top: 10px; background: var(--green);">
-                    <i class="fas fa-download"></i> حفظ البيانات
-                </button>
-            </div>
-
-            <!-- قسم معلومات الاتصال -->
-            <div id="contact" class="contact-info">
-                <h3>معلومات الاتصال</h3>
-                <p>للاستفسار عن الكتاب أو طلبات الشراء، يمكنكم التواصل مباشرة مع الدكتور بن الدين بويعقوب:</p>
-                <div class="contact-details">
-                    <div class="contact-item">
-                        <i class="fas fa-phone-alt"></i>
-                        <span>0558474456</span>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <span>beneddineinps@gmail.com</span>
-                    </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>beneddineinps@gmail.com</span>
                 </div>
             </div>
-
-            <!-- دخول المسؤول -->
-            <div class="admin-login">
-                <h4><i class="fas fa-lock"></i> دخول المسؤول</h4>
-                <input type="password" id="adminPassword" placeholder="أدخل كلمة المرور" class="form-control" style="display: inline-block; width: 200px;">
-                <button onclick="loginAdmin()" class="btn" style="background: var(--dark-blue);">
-                    <i class="fas fa-sign-in-alt"></i> دخول
-                </button>
-            </div>
-
-            <!-- لوحة المسؤول -->
-            <div id="adminPanel" class="admin-panel">
-                <h4><i class="fas fa-cog"></i> لوحة التحكم - الطلبات المسجلة (<span id="ordersCount">0</span>)</h4>
-                <button onclick="exportAllOrders()" class="btn" style="background: var(--green);">
-                    <i class="fas fa-file-export"></i> تصدير جميع الطلبات
-                </button>
-                
-                <div class="orders-list" id="ordersList">
-                    <!-- سيتم عرض الطلبات هنا -->
-                </div>
-            </div>
+            <p style="margin-top: 30px; font-size: 1.1rem;">نحن على استعداد للإجابة على جميع استفساراتكم حول الكتاب وتقديم المساعدة اللازمة</p>
         </section>
     </div>
 
@@ -955,7 +745,7 @@
                         <li><a href="#videos">الفيديوهات</a></li>
                         <li><a href="#features">المميزات</a></li>
                         <li><a href="#index">فهرس المحتويات</a></li>
-                        <li><a href="#register">طلب الكتاب</a></li>
+                        <li><a href="#contact">اتصل بنا</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -970,13 +760,6 @@
     </footer>
 
     <script>
-        // كلمة مرور المسؤول
-        const ADMIN_PASSWORD = "beneddine1981";
-        
-        // تخزين البيانات محلياً
-        let formSubmissions = JSON.parse(localStorage.getItem('bookOrders')) || [];
-        let isAdminLoggedIn = false;
-
         // تأثير التمرير السلس للروابط الداخلية
         document.querySelectorAll('nav a, .footer-links a').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
@@ -1009,4 +792,49 @@
             rootMargin: '0px 0px -50px 0px'
         };
 
-       
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // تطبيق التأثير على العناصر
+        document.querySelectorAll('.content-section, .feature, .gallery-item, .video-item, .contact-info').forEach(el => {
+            el.style.opacity = 0;
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(el);
+        });
+
+        // تحميل الصور والتحقق منها
+        document.addEventListener('DOMContentLoaded', function() {
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            
+            galleryItems.forEach(item => {
+                const backgroundImage = item.style.backgroundImage;
+                
+                // إذا كانت هناك صورة خلفية، اخفِ العنصر النائب
+                if (backgroundImage && backgroundImage !== 'none') {
+                    const placeholder = item.querySelector('.image-placeholder');
+                    if (placeholder) {
+                        // اختبار تحميل الصورة
+                        const img = new Image();
+                        img.onload = function() {
+                            placeholder.style.display = 'none';
+                        };
+                        img.onerror = function() {
+                            placeholder.style.display = 'flex';
+                        };
+                        // استخراج رابط الصورة من background-image
+                        const imageUrl = backgroundImage.replace('url("', '').replace('")', '');
+                        img.src = imageUrl;
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
